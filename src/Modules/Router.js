@@ -1,3 +1,5 @@
+import { App } from "./App";
+
 export class Router {
     constructor(pages, app) {
         this.pages = pages;

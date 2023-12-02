@@ -5,13 +5,22 @@ export class Page {
     }
 
     render(appContainer) {
+        
         fetch(`./pages/${this.template}`)
         .then(response => response.text())
         .then(html => {
-            appContainer.innerHTML = html;
 
-            this.afterRender();
+            this.prepareForRender(html).then(result => {
+                appContainer.innerHTML = result;
+
+                this.afterRender();
+            });
+
         })
+    }
+
+    async prepareForRender(html) {
+        return html;
     }
 
     afterRender() {

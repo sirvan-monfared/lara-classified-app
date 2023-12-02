@@ -1,9 +1,17 @@
+import { Classified } from "./Classified";
+
 export class App {
-    constructor() {
-        this.appContainer = document.getElementById('app');
+
+    static init() {
+        this.classified = new Classified();
     }
 
-    getAppContainer() {
-        return this.appContainer;
+    static getAppContainer() {
+        return this.classified.appContainer;
+    }
+
+    
+    static getRouter() {
+        return this.classified.router;
     }
 }
