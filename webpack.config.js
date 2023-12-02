@@ -8,6 +8,10 @@ module.exports = {
         path: path.resolve(__dirname, 'public')
     },
     devServer: {
-        static: './public/'
+        static: './public/',
+        historyApiFallback: true
+    },
+    performance: {
+        hints: false,
     }
 }

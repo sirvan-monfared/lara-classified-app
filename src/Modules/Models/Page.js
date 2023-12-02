@@ -4,16 +4,16 @@ export class Page {
         this.template = template;
     }
 
-    render(appContainer) {
+    render(appContainer, data) {
         
-        fetch(`./pages/${this.template}`)
+         fetch(`./pages/${this.template}`)
         .then(response => response.text())
         .then(html => {
 
-            this.prepareForRender(html).then(result => {
+            this.prepareForRender(html, data).then(result => {
                 appContainer.innerHTML = result;
 
-                this.afterRender();
+                this.afterRender(data);
             });
 
         })

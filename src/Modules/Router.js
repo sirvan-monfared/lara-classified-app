@@ -6,11 +6,11 @@ export class Router {
         this.app = app;
     }
 
-    navigateTo(route) {
+    navigateTo(route, data = null) {
         const page = this.pages.find(item => item.route === route);
 
         if (page) {
-            page.render(this.app.getAppContainer());
+            page.render(this.app.getAppContainer(), data);
             history.pushState({ route: route }, '', route);
         }
     }
