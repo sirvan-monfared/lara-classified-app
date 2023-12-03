@@ -1,3 +1,5 @@
+import { Loading } from "../Utils/Loading";
+
 export class Page {
     constructor(route, template) {
         this.route = route;
@@ -5,6 +7,8 @@ export class Page {
     }
 
     render(appContainer, data) {
+        Loading.show();
+        window.scrollTo({top: 0, behavior: 'smooth'});
         
          fetch(`./pages/${this.template}`)
         .then(response => response.text())
@@ -14,6 +18,7 @@ export class Page {
                 appContainer.innerHTML = result;
 
                 this.afterRender(data);
+                Loading.hide();
             });
 
         })

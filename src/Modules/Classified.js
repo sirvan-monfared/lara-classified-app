@@ -26,7 +26,6 @@ export class Classified {
 
     handleNavigationLinks() {
         document.addEventListener('click', (event) => {
-            console.log(event.target);
             event.preventDefault();
 
 
@@ -42,8 +41,6 @@ export class Classified {
             if (! link) {
                 return;
             }
-
-
             
             this.router.navigateTo(
                 link.getAttribute('href').substring(1),

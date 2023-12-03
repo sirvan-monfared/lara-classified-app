@@ -1,0 +1,1 @@
+export const baseUrl = 'https://js-course-api.test/api/v1';
