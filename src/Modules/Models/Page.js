@@ -42,7 +42,7 @@ export class Page {
     }
 
     afterRender() {
-        console.log('this is default message');
+        
     }
 
     restrictOnAuth() {

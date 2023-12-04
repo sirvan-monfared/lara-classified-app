@@ -8,7 +8,7 @@ export class Router {
 
     navigateTo(route, data = null) {
         const page = this.pages.find(item => item.route === route);
-
+console.log(page, route);
         if (page) {
             page.render(this.app.getAppContainer(), data);
             history.pushState({ route: route }, '', route);
