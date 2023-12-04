@@ -23,6 +23,14 @@ export class App {
         return this.classified.router;
     }
 
+    static getCategoryList() {
+        return this.classified.categoryList;
+    }
+
+    static getLocationList() {
+        return this.classified.locationList;
+    }
+
     static getAuth() {
         return this.classified.auth;
     }

@@ -12,15 +12,13 @@ export class Page {
         window.scrollTo({top: 0, behavior: 'smooth'});
 
         if (this.restrictOnAuth() && App.getAuth().check()) {
-            console.log('nooo');
             App.getRouter().navigateTo('home');
             
             return;
         }
 
         if (this.shouldBeLoggedIn() && ! App.getAuth().check()) {
-            console.log('yesss', this.shouldBeLoggedIn(), App.getAuth().check());
-            App.getRouter().navigateTo('home');
+            App.getRouter().navigateTo('login');
 
             return;
         }

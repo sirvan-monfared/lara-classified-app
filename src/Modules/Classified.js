@@ -2,6 +2,8 @@ import { Router } from "./Router";
 import pages from "../routes";
 import { AdsList } from "./Models/AdsList";
 import { Auth } from "./Models/Auth";
+import { CategoryList } from "./Models/CategoryList";
+import { LocationList } from "./Models/LocationList";
 
 export class Classified {
     constructor() {
@@ -14,6 +16,8 @@ export class Classified {
     initiateApp() {
         this.adsList = new AdsList();
         this.auth = new Auth();
+        this.categoryList = new CategoryList();
+        this.locationList = new LocationList();
     }
 
     initiateRouter() {
