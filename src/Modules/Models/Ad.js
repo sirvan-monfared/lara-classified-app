@@ -18,7 +18,7 @@ export class Ad {
         this.templateElm = document.getElementById('ad-template');
     }
 
-    render() {
+    render(isDashboard = false) {
         const adElm = document.importNode(this.templateElm.content, true);
 
         adElm.querySelectorAll('a').forEach(link => {
@@ -31,6 +31,12 @@ export class Ad {
         adElm.querySelector('.item-title').textContent = this.title;
         adElm.querySelector('.item-category').textContent = this.category.title;
         adElm.querySelector('.item-location').textContent = this.location.title;
+
+        if (isDashboard) {
+            adElm.querySelector('.item-ribbon').classList.remove('hidden');
+            adElm.querySelector('.item-delete').classList.remove('hidden');
+            adElm.querySelector('.item-delete').setAttribute('data-item-id', this.id);
+        }
 
 
         return adElm;

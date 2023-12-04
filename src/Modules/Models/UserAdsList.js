@@ -1,18 +1,14 @@
 import axios from "axios";
 import { Ad } from "./Ad";
 import { baseUrl } from "../Utils/Options";
+import { App } from "../App";
 
-export class AdsList {
+export class UserAdsList {
     constructor() {
         this.ads = [];
     }
 
     async loadAds() {
-
-        if (this.ads.length > 0) {
-            return this.ads;
-        }
-
         const {data: result} = await this.fetch();
 
         result.data.forEach(item => {
@@ -27,6 +23,18 @@ export class AdsList {
     }
 
     fetch() {
-        return axios.get(`${baseUrl}/ads`);
+        return axios.get(`${baseUrl}/account/listing`, {
+            headers: {
+                Authorization: App.getAuth().authorizationToken()
+            }
+        });
+    }
+
+    async delete(id) {
+        return axios.delete(`${baseUrl}/account/listing/${id}`, {
+            headers: {
+                Authorization: App.getAuth().authorizationToken()
+            }
+        })
     }
 }
