@@ -1,3 +1,4 @@
+import { App } from "../App";
 import { Loading } from "../Utils/Loading";
 
 export class Page {
@@ -9,8 +10,22 @@ export class Page {
     render(appContainer, data) {
         Loading.show();
         window.scrollTo({top: 0, behavior: 'smooth'});
+
+        if (this.restrictOnAuth() && App.getAuth().check()) {
+            console.log('nooo');
+            App.getRouter().navigateTo('home');
+            
+            return;
+        }
+
+        if (this.shouldBeLoggedIn() && ! App.getAuth().check()) {
+            console.log('yesss', this.shouldBeLoggedIn(), App.getAuth().check());
+            App.getRouter().navigateTo('home');
+
+            return;
+        }
         
-         fetch(`./pages/${this.template}`)
+        fetch(`./pages/${this.template}`)
         .then(response => response.text())
         .then(html => {
 
@@ -30,5 +45,13 @@ export class Page {
 
     afterRender() {
         console.log('this is default message');
+    }
+
+    restrictOnAuth() {
+        return  false;
+    }
+
+    shouldBeLoggedIn() {
+        return false;
     }
 }

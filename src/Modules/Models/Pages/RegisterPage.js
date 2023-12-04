@@ -1,4 +1,4 @@
-import { RegisterSubmitForm } from "../../Utils/RegisterSubmitForm";
+import { RegisterForm } from "../../Utils/RegisterForm";
 import { Page } from "../Page";
 
 export class RegisterPage extends Page {
@@ -7,7 +7,7 @@ export class RegisterPage extends Page {
     }
 
     afterRender() {
-        const form = new RegisterSubmitForm();
+        const form = new RegisterForm();
 
         form.submit();
     }

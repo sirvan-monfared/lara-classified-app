@@ -22,4 +22,8 @@ export class App {
     static getRouter() {
         return this.classified.router;
     }
+
+    static getAuth() {
+        return this.classified.auth;
+    }
 }
