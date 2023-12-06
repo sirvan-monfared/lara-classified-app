@@ -22,11 +22,15 @@ export class CategoryList {
         return this.categories;
     }
 
-    renderTo(targetElm) {
+    renderTo(targetElm, selected_value = null) {
         this.categories.forEach(item => {
             const option = document.createElement('option');
             option.value = item.id;
             option.innerText = item.title;
+
+            if (item.id === +selected_value) {
+                option.setAttribute('selected', true);
+            }
             
             targetElm.append(option);
         })
