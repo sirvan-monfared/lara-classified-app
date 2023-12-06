@@ -10,6 +10,10 @@ export class SubmitForm extends Form {
 
         this.form = document.getElementById('submit-form');
         this.submitBtn = document.getElementById('submit-button');
+
+        this.uploader_input = document.getElementById('uploader');
+
+        this._handleUploader();
     }
 
 
@@ -73,6 +77,12 @@ export class SubmitForm extends Form {
     async sendFormData() {
         const formData = new FormData();
 
+        console.log(this.uploader_input.value, this.uploader_input.files[0]);
+
+        if (this.uploader_input.value) {
+            formData.append('image', this.uploader_input.files[0], this.uploader_input.value);
+        }
+
         formData.append('title', this.form.querySelector('#title').value);
         formData.append('category_id', this.form.querySelector('#category').value);
         formData.append('location_id', this.form.querySelector('#location').value);
@@ -84,6 +94,28 @@ export class SubmitForm extends Form {
             headers: {
                 Authorization: App.getAuth().authorizationToken()
             }
+        })
+    }
+
+    _handleUploader() {
+        this.uploader_input.parentElement.addEventListener('click', (event) => {
+            this.uploader_input.click();
+        })
+
+        this.uploader_input.addEventListener('change', () => {
+            const reader = new FileReader();
+            const imagePlaceholder = this.uploader_input.parentElement.querySelector("[data-image-placeholder]");
+
+            reader.onload = (event) => {
+                imagePlaceholder.style['backgroundImage'] = `url(${event.target.result})`;
+            }
+
+            if (this.uploader_input.files[0]) {
+                reader.readAsDataURL(this.uploader_input.files[0]);
+            } else {
+                imagePlaceholder.style['backgroundImage'] = '';
+            }
+            
         })
     }
 }

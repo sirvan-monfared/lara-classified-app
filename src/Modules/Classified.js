@@ -32,8 +32,12 @@ export class Classified {
 
     handleNavigationLinks() {
         document.addEventListener('click', (event) => {
-            event.preventDefault();
 
+            if (event.target.tagName === 'INPUT') {
+                return;
+            }
+
+            event.preventDefault();
 
             let link = null;
             if (event.target.tagName === 'IMG' || event.target.tagName === 'I') {

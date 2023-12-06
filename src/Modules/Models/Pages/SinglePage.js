@@ -1,6 +1,7 @@
 import { App } from "../../App";
 import { Page } from "../Page";
 import L from "leaflet";
+import { UserAdsList } from "../UserAdsList";
 
 export class SinglePage extends Page {
     async prepareForRender(pageContent, adId) {
@@ -8,7 +9,12 @@ export class SinglePage extends Page {
         pageDom.innerHTML = pageContent;
         
 
-        const ad = App.getAdsList().find(adId);
+        const ad  = await this._findAd(adId);
+
+        if (! ad) {
+            App.getRouter().navigateTo('home');
+        }
+        
         
         this._prepareDOM(pageDom, ad);
 
@@ -35,11 +41,21 @@ export class SinglePage extends Page {
         pageDom.querySelector(".user-date").innerText = ad.owner.joined;
     }
 
-    afterRender(adId) {
-        const ad = App.getAdsList().find(adId);
+    async afterRender(adId) {
+        const ad = await this._findAd(adId)
 
         this._renderMap(ad);
-        
+    }
+
+    async _findAd(adId) {
+        let ad = App.getAdsList().find(adId);
+
+        if (ad) {
+            return ad;
+        }
+
+        ad = await new UserAdsList().find(adId);
+        return ad;
     }
 
     _renderMap(ad) {

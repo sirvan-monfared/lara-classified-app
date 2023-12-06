@@ -5,6 +5,13 @@ import { baseUrl } from "../Utils/Options";
 export class AdsList {
     constructor() {
         this.ads = [];
+
+        this.filters = {
+            keyword: null,
+            category: null,
+            location: null,
+            sort: 'default'
+        }
     }
 
     async loadAds() {
@@ -27,6 +34,14 @@ export class AdsList {
     }
 
     fetch() {
-        return axios.get(`${baseUrl}/ads`);
+        let queryString = "";
+        for(let filter in this.filters) {
+
+            if (! this.filters[filter]) continue;
+
+            queryString += `${filter}=${this.filters[filter]}&`;
+        }
+
+        return axios.get(`${baseUrl}/ads?${queryString}`);
     }
 }

@@ -18,8 +18,16 @@ export class UserAdsList {
         return this.ads;
     }
 
-    find(id) {
-        return this.ads.find(item => +item.id === +id)
+    async find(id) {
+        const {data: result} = await axios.get(`${baseUrl}/account/listing/${id}`, {
+            headers: {
+                Authorization: App.getAuth().authorizationToken()
+            }
+        });
+
+        if (! result.data) return;
+
+        return new Ad(result.data);
     }
 
     fetch() {
